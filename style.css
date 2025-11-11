@@ -1,0 +1,133 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(120deg, #fff0f6 0%, #fceabb 100%);
+    color: #22223b;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    transition: background 0.5s;
+    /* Add fade-in animation */
+    opacity: 0;
+    animation: bodyFadeIn 1.2s ease-in forwards, bgMove 10s ease-in-out infinite alternate;
+    background-size: 200% 200%;
+}
+
+@keyframes bodyFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bgMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+h1 {
+    color: #d72660;
+    text-align: center;
+    margin-top: 48px;
+    font-size: 2.8rem;
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    text-shadow: 0 2px 12px #fff0f6;
+}
+
+h2 {
+    color: #f46036;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+ul {
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    padding: 28px 36px;
+    box-shadow: 0 6px 32px rgba(215, 38, 96, 0.10);
+    margin: 28px auto;
+    max-width: 520px;
+    list-style: none;
+    text-align: center; /* Center list content */
+}
+
+li {
+    margin-bottom: 16px;
+    font-size: 1.13em;
+    position: relative;
+    padding-left: 0; /* Remove left padding */
+    line-height: 1.7;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center li content horizontally */
+    gap: 8px; /* Space between icon and text */
+}
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+li::before {
+    content: "♥";
+    color: #d72660;
+    font-size: 1.1em;
+    margin-right: 8px;
+    position: static; /* Remove absolute positioning */
+    left: unset;
+    top: unset;
+    transition: color 0.2s;
+    display: inline-block;
+}
+
+li:hover {
+    background: #fff0f6;
+    border-radius: 8px;
+}
+
+a {
+    color: #1b98e0;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+}
+
+a:hover {
+    color: #fff;
+    background: #d72660;
+    text-decoration: none;
+}
+
+p {
+    text-align: center;
+    max-width: 650px;
+    margin: 18px auto;
+    line-height: 1.8;
+    font-size: 1.15em;
+    color: #4a4e69;
+}
+
+@media (max-width: 700px) {
+    ul {
+        padding: 16px 6vw;
+        max-width: 98vw;
+        text-align: center;
+    }
+    h1 {
+        font-size: 2.1rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+    p {
+        font-size: 1em;
+    }
+}

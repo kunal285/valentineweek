@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+      font-family: 'Roboto', sans-serif;
+      transition: background-color 10s ease;
+      overflow: hidden;
+    }
+
+    .hug-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .character {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: hug 15s infinite;
+    }
+
+    .left-character {
+      background-image: url('left_character.jpg'); /* Adjust the path as needed */
+      transform: scaleX(-1); /* Flip horizontally to face right */
+    }
+
+    .right-character {
+      background-image: url('rig.jpg'); /* Adjust the path as needed */
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff6b6b;
+      clip-path: polygon(
+        50% 0%,
+        100% 35%,
+        82% 100%,
+        18% 100%,
+        0% 35%
+      );
+      animation: heartbeat 1s infinite;
+    }
+
+    .star {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: #ffeb3b;
+      clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+      );
+      animation: twinkle 2s infinite alternate;
+    }
+
+    .text-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .text {
+      font-size: 24px;
+      color: #333;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hug-button {
+      background-color: #ff6b6b;
+      color: #fff;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.1s ease;
+    }
+
+    .hug-button:hover {
+      background-color: #ff4d4d;
+    }
+
+    @keyframes hug {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hug-container">
+    <div class="character left-character"></div>
+    <div class="character right-character"></div>
+    <div class="heart"></div>
+    <div class="star" style="top: 30%; left: 20%;"></div>
+    <div class="star" style="top: 60%; left: 70%;"></div>
+    <!-- Add more stars as needed -->
+  </div>
+
+  <div class="text-container">
+    <p class="text" id="greetingText">On this Hug Day, sending you all my love wrapped up in virtual hugs! Imagine feeling the warmth and comfort as if we were together! Hugs speak a language of love that words sometimes miss! Whether near or far, know that you're in my heart! Happy Hug Day, my love! Here's to the sweet moments we share, even from a distance.</p>
+  </div>
+
+  <div class="button-container">
+    <button class="hug-button" onclick="startHug()">Give Me a Tight Hug</button>
+  </div>
+
+  <script>
+    function startHug() {
+      const greetingText = document.getElementById('greetingText');
+
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      document.querySelector('.hug-container').appendChild(heart);
+
+      const audio = new Audio('abcdefghi-love-you-still-tyler-shaw-english-song.mp3'); // Replace with the actual sound file
+      audio.volume = 0.2;
+      audio.play();
+
+      const textSegments = greetingText.innerText.split('. ');
+      let currentTime = 0;
+
+      textSegments.forEach(segment => {
+        const speech = new SpeechSynthesisUtterance(segment);
+        speech.volume = 2; // Set volume to 200% for text-to-speech
+        setTimeout(() => window.speechSynthesis.speak(speech), currentTime * 1000);
+        currentTime += segment.length / 7; // Adjust based on segment length
+      });
+
+      // Random background color
+      const randomColor = getRandomColor();
+      document.body.style.backgroundColor = randomColor;
+
+      setTimeout(() => {
+        heart.remove();
+        greetingText.innerHTML = "On this Hug Day, sending you all my love wrapped up in virtual hugs! Imagine feeling the warmth and comfort as if we were together! Hugs speak a language of love that words sometimes miss! Whether near or far, know that you're in my heart! Happy Hug Day, my love! Here's to the sweet moments we share, even from a distance.";
+        // Reset background color to default
+        document.body.style.backgroundColor = "#f5f5f5";
+        audio.pause();
+        audio.currentTime = 0;
+      }, 32000); // Stop background color change after 30 seconds
+    }
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+  </script>
+</body>
+</html>
